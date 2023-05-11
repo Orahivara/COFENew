@@ -1,0 +1,26 @@
+﻿<Window x:Class="COFE.Windows.Employes"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:COFE.Windows"
+        mc:Ignorable="d"
+        Title="Employes" Height="450" Width="800">
+    <Grid x:Name="back">
+
+        <Button x:Name="addemploye" Content="Добавить" HorizontalAlignment="Left" Margin="579,109,0,0" VerticalAlignment="Top" Click="addemploye_Click"  />
+        <ListView x:Name="listviewUsers" HorizontalAlignment="Stretch"  
+                  Margin="10,60,300,10" VerticalAlignment="Stretch">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=FirstName}" 
+                      Header="Name" Width="100"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=LastName}" 
+                      Header="Surname" Width="100"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="change" Content="Изменить" HorizontalAlignment="Left" Margin="579,278,0,0" VerticalAlignment="Top" Click="btn_Click" />
+
+    </Grid>
+</Window>

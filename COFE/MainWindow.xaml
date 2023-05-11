@@ -1,0 +1,18 @@
+﻿<Window x:Class="COFE.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:COFE"
+        mc:Ignorable="d"
+            Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <TextBox x:Name="login" HorizontalAlignment="Left" Margin="474,174,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.951,1.392"/>
+        <TextBox x:Name="password" HorizontalAlignment="Left" Margin="474,245,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,0.5" />
+        <Label x:Name="AutName" Content="Вход" HorizontalAlignment="Left" Margin="514,90,0,0" VerticalAlignment="Top" Height="54" Width="180"/>
+        <Button x:Name="signin" Content="Зарегистрироваться" HorizontalAlignment="Left" Margin="437,300,0,0" VerticalAlignment="Top" Click="signin_Click" />
+        <Button x:Name="_in" Content="Войти" HorizontalAlignment="Left" Margin="586,300,0,0" VerticalAlignment="Top" Click="_in_Click" RenderTransformOrigin="0.545,0.608"/>
+        <Button Name="inlikeguest" Content="Войти как гость" HorizontalAlignment="Left" Margin="103,285,0,0" VerticalAlignment="Top" Click="inlikeguest_Click"/>
+
+    </Grid>
+</Window>

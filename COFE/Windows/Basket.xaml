@@ -1,0 +1,69 @@
+﻿<Window x:Class="COFE.Windows.Basket"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:COFE.Windows"
+        mc:Ignorable="d"
+        Title="Basket" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Корзина" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+        <ListView x:Name="listv" Grid.Row="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" d:ItemsSource="{d:SampleData ItemCount=1}" >
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border 
+                            BorderThickness="1"
+                            Margin="5"
+                            Width="700"
+                            Height="100">
+                        <WrapPanel>
+                            <Image Height="100"
+                                   Width="100"
+                                   Stretch="Fill">
+
+                            </Image>
+                            <TextBlock Text="{Binding NameOfProduct}"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       Margin="0 0 0 0"
+                                       TextWrapping="Wrap" />
+                            <TextBlock Text="{Binding Count}"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       Margin="150 0 0 0"
+                                       TextWrapping="Wrap" />
+
+                            <TextBlock Text="{Binding Cost}"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       Margin="150 0 0 0"
+                                       TextWrapping="Wrap"/>
+
+
+
+
+
+
+                        </WrapPanel>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+
+
+        </ListView>
+
+    </Grid>
+</Window>
