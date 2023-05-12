@@ -7,11 +7,11 @@
         mc:Ignorable="d"
         Title="Choose" Height="450" Width="800">
     <Grid>
-        <Button x:Name="employ" Content="Сотрудники" HorizontalAlignment="Center" Margin="0,81,0,0" VerticalAlignment="Top" Height="40" Width="144" Click="employ_Click">
+        <Button x:Name="employ" Content="Сотрудники" HorizontalAlignment="Center" Margin="0,81,0,0" VerticalAlignment="Top" Height="40" Width="144" Click="employ_Click" IsEnabled="False">
         </Button>
         <Button x:Name="products" Content="Продукты" HorizontalAlignment="Center" Margin="0,177,0,0" VerticalAlignment="Top" Height="40" Width="144" Click="products_Click" >
         </Button>
-        <Button x:Name="something" Content="Клиенты" HorizontalAlignment="Center" Margin="0,279,0,0" VerticalAlignment="Top" Height="40" Width="144" Click="something_Click" >
+        <Button x:Name="something" Content="Клиенты" HorizontalAlignment="Center" Margin="0,279,0,0" VerticalAlignment="Top" Height="40" Width="144" Click="something_Click" IsEnabled="False" >
         </Button>
         <TextBlock x:Name="hi" HorizontalAlignment="Left" Margin="613,22,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="30" Width="135"/>
 

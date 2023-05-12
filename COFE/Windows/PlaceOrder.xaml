@@ -73,7 +73,8 @@
 
 
         </ListView>
-        <Button Content="Добавить" Margin="10,17,606,17" Grid.RowSpan="2"/>
+        <Button Content="Добавить" Margin="10,17,606,17" Grid.RowSpan="2" Click="Button_Click"/>
+        <Button Content="Корзина" Margin="606,17,10,17" Grid.RowSpan="2" Click="bug_Click"/>
 
     </Grid>
 </Window>

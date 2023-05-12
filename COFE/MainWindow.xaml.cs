@@ -36,6 +36,7 @@ namespace COFE
     
         private void _in_Click(object sender, RoutedEventArgs e)
         {
+
             var correct = HELP.Context.User.FirstOrDefault(u => u.Login == login.Text && u.Password == password.Text);
             if (correct != null)
             {
@@ -59,6 +60,7 @@ namespace COFE
             var correct = HELP.Context.User.First(u => u.IDUser == 0);
             Application.Current.Properties["Name"] = correct.FirstName.ToString();
             Application.Current.Properties["Role"] = correct.IDTypeOfUser;
+            Application.Current.Properties["All"] = Convert.ToInt32(correct.IDUser);
             Windows.Choose choose = new Windows.Choose();
             choose.Show();
             this.Close();

@@ -8,7 +8,7 @@
         Title="Employes" Height="450" Width="800">
     <Grid x:Name="back">
 
-        <Button x:Name="addemploye" Content="Добавить" HorizontalAlignment="Left" Margin="579,109,0,0" VerticalAlignment="Top" Click="addemploye_Click"  />
+        <Button x:Name="addemploye" Width="150" Height="50" Content="Добавить" HorizontalAlignment="Left" Margin="579,109,0,0" VerticalAlignment="Top" Click="addemploye_Click"  />
         <ListView x:Name="listviewUsers" HorizontalAlignment="Stretch"  
                   Margin="10,60,300,10" VerticalAlignment="Stretch">
             <ListView.View>
@@ -20,7 +20,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="change" Content="Изменить" HorizontalAlignment="Left" Margin="579,278,0,0" VerticalAlignment="Top" Click="btn_Click" />
+        <Button x:Name="change" Width="150" Height="50" Content="Изменить" HorizontalAlignment="Left" Margin="579,270,0,109" VerticalAlignment="Top" Click="btn_Click" />
 
     </Grid>
 </Window>

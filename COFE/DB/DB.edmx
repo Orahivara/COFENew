@@ -13,7 +13,7 @@
           <Property Name="IDCofe" Type="int" />
           <Property Name="IssuingTime" Type="datetime" />
           <Property Name="IDUser" Type="int" />
-          <Property Name="ISBuy" Type="nchar" MaxLength="10" />
+          <Property Name="ISBuy" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Cofe">
           <Key>
@@ -316,279 +316,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="COFEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Check">
-          <Key>
-            <PropertyRef Name="IDCheck" />
-          </Key>
-          <Property Name="IDCheck" Type="Int32" Nullable="false" />
-          <Property Name="IDCofe" Type="Int32" />
-          <Property Name="IssuingTime" Type="DateTime" Precision="3" />
-          <Property Name="IDUser" Type="Int32" />
-          <NavigationProperty Name="Cofe" Relationship="Self.FK_Check_Cofe" FromRole="Check" ToRole="Cofe" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Check_User1" FromRole="Check" ToRole="User" />
-          <NavigationProperty Name="ProductCheck" Relationship="Self.FK_ProductCheck_Check" FromRole="Check" ToRole="ProductCheck" />
-          <Property Name="ISBuy" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Cofe">
-          <Key>
-            <PropertyRef Name="IDCofe" />
-          </Key>
-          <Property Name="IDCofe" Type="Int32" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DirectorName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Phone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Check" Relationship="Self.FK_Check_Cofe" FromRole="Cofe" ToRole="Check" />
-        </EntityType>
-        <EntityType Name="Composition">
-          <Key>
-            <PropertyRef Name="IDComposition" />
-          </Key>
-          <Property Name="IDComposition" Type="Int32" Nullable="false" />
-          <Property Name="NameOfIngredient" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="WeightInGrams" Type="Int32" Nullable="false" />
-          <Property Name="Calories" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CompositionProduct" Relationship="Self.FK_CompositionProduct_Composition" FromRole="Composition" ToRole="CompositionProduct" />
-        </EntityType>
-        <EntityType Name="Gender">
-          <Key>
-            <PropertyRef Name="IDGender" />
-          </Key>
-          <Property Name="IDGender" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="NameOfGender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="User" Relationship="Self.FK_User_Gender" FromRole="Gender" ToRole="User" />
-        </EntityType>
-        <EntityType Name="Product">
-          <Key>
-            <PropertyRef Name="IDProduct" />
-          </Key>
-          <Property Name="IDProduct" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NameOfProduct" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Quantity" Type="Int32" />
-          <Property Name="Cost" Type="Int32" />
-          <Property Name="Sale" Type="Double" />
-          <Property Name="IDTypeOfProduct" Type="Int32" Nullable="false" />
-          <Property Name="Imagin" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="TypeOfProduct" Relationship="Self.FK_Product_TypeOfProduct" FromRole="Product" ToRole="TypeOfProduct" />
-          <NavigationProperty Name="ProductCheck" Relationship="Self.FK_ProductCheck_Product" FromRole="Product" ToRole="ProductCheck" />
-        </EntityType>
-        <EntityType Name="ProductCheck">
-          <Key>
-            <PropertyRef Name="idprodcheck" />
-          </Key>
-          <Property Name="IDProduct" Type="Int32" />
-          <Property Name="IDCheck" Type="Int32" Nullable="false" />
-          <Property Name="idprodcheck" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Check" Relationship="Self.FK_ProductCheck_Check" FromRole="ProductCheck" ToRole="Check" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_ProductCheck_Product" FromRole="ProductCheck" ToRole="Product" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="TypeOfProduct">
-          <Key>
-            <PropertyRef Name="IDTypeOfProduct" />
-          </Key>
-          <Property Name="IDTypeOfProduct" Type="Int32" Nullable="false" />
-          <Property Name="NameTypeOfProduct" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product_TypeOfProduct" FromRole="TypeOfProduct" ToRole="Product" />
-        </EntityType>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="IDUser" />
-          </Key>
-          <Property Name="IDTypeOfUser" Type="Int32" />
-          <Property Name="IDUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IDGender" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-          <Property Name="Phone" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Patronimic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Check" Relationship="Self.FK_Check_User1" FromRole="User" ToRole="Check" />
-          <NavigationProperty Name="Gender" Relationship="Self.FK_User_Gender" FromRole="User" ToRole="Gender" />
-          <NavigationProperty Name="UserType" Relationship="Self.FK_User_UserType" FromRole="User" ToRole="UserType" />
-        </EntityType>
-        <EntityType Name="UserType">
-          <Key>
-            <PropertyRef Name="IDType" />
-          </Key>
-          <Property Name="IDType" Type="Int32" Nullable="false" />
-          <Property Name="NameTypeOfUser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="RightsOfUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="User" Relationship="Self.FK_User_UserType" FromRole="UserType" ToRole="User" />
-        </EntityType>
-        <EntityType Name="CompositionProduct">
-          <Key>
-            <PropertyRef Name="IDComposition" />
-            <PropertyRef Name="IDProduct" />
-          </Key>
-          <Property Name="IDComposition" Type="Int32" Nullable="false" />
-          <Property Name="IDProduct" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Composition" Relationship="Self.FK_CompositionProduct_Composition" FromRole="CompositionProduct" ToRole="Composition" />
-        </EntityType>
-        <EntityType Name="BasketAll">
-          <Key>
-            <PropertyRef Name="IDCheck" />
-          </Key>
-          <Property Name="NameOfProduct" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Cost" Type="Int32" />
-          <Property Name="Sale" Type="Double" />
-          <Property Name="Imagin" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="IDCheck" Type="Int32" Nullable="false" />
-          <Property Name="IDUser" Type="Int32" />
-        </EntityType>
-        <Association Name="FK_Check_Cofe">
-          <End Role="Cofe" Type="Self.Cofe" Multiplicity="0..1" />
-          <End Role="Check" Type="Self.Check" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cofe">
-              <PropertyRef Name="IDCofe" />
-            </Principal>
-            <Dependent Role="Check">
-              <PropertyRef Name="IDCofe" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Check_User1">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="Check" Type="Self.Check" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="IDUser" />
-            </Principal>
-            <Dependent Role="Check">
-              <PropertyRef Name="IDUser" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProductCheck_Check">
-          <End Role="Check" Type="Self.Check" Multiplicity="1" />
-          <End Role="ProductCheck" Type="Self.ProductCheck" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Check">
-              <PropertyRef Name="IDCheck" />
-            </Principal>
-            <Dependent Role="ProductCheck">
-              <PropertyRef Name="IDCheck" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CompositionProduct_Composition">
-          <End Role="Composition" Type="Self.Composition" Multiplicity="1" />
-          <End Role="CompositionProduct" Type="Self.CompositionProduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Composition">
-              <PropertyRef Name="IDComposition" />
-            </Principal>
-            <Dependent Role="CompositionProduct">
-              <PropertyRef Name="IDComposition" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_User_Gender">
-          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Gender">
-              <PropertyRef Name="IDGender" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="IDGender" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Product_TypeOfProduct">
-          <End Role="TypeOfProduct" Type="Self.TypeOfProduct" Multiplicity="1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TypeOfProduct">
-              <PropertyRef Name="IDTypeOfProduct" />
-            </Principal>
-            <Dependent Role="Product">
-              <PropertyRef Name="IDTypeOfProduct" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProductCheck_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
-          <End Role="ProductCheck" Type="Self.ProductCheck" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="IDProduct" />
-            </Principal>
-            <Dependent Role="ProductCheck">
-              <PropertyRef Name="IDProduct" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_User_UserType">
-          <End Role="UserType" Type="Self.UserType" Multiplicity="0..1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserType">
-              <PropertyRef Name="IDType" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="IDTypeOfUser" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="COFEEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Check" EntityType="Self.Check" />
-          <EntitySet Name="Cofe" EntityType="Self.Cofe" />
-          <EntitySet Name="Composition" EntityType="Self.Composition" />
-          <EntitySet Name="Gender" EntityType="Self.Gender" />
-          <EntitySet Name="Product" EntityType="Self.Product" />
-          <EntitySet Name="ProductCheck" EntityType="Self.ProductCheck" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="TypeOfProduct" EntityType="Self.TypeOfProduct" />
-          <EntitySet Name="User" EntityType="Self.User" />
-          <EntitySet Name="UserType" EntityType="Self.UserType" />
-          <EntitySet Name="CompositionProduct" EntityType="Self.CompositionProduct" />
-          <EntitySet Name="BasketAll" EntityType="Self.BasketAll" />
-          <AssociationSet Name="FK_Check_Cofe" Association="Self.FK_Check_Cofe">
-            <End Role="Cofe" EntitySet="Cofe" />
-            <End Role="Check" EntitySet="Check" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Check_User1" Association="Self.FK_Check_User1">
-            <End Role="User" EntitySet="User" />
-            <End Role="Check" EntitySet="Check" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductCheck_Check" Association="Self.FK_ProductCheck_Check">
-            <End Role="Check" EntitySet="Check" />
-            <End Role="ProductCheck" EntitySet="ProductCheck" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CompositionProduct_Composition" Association="Self.FK_CompositionProduct_Composition">
-            <End Role="Composition" EntitySet="Composition" />
-            <End Role="CompositionProduct" EntitySet="CompositionProduct" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_Gender" Association="Self.FK_User_Gender">
-            <End Role="Gender" EntitySet="Gender" />
-            <End Role="User" EntitySet="User" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_TypeOfProduct" Association="Self.FK_Product_TypeOfProduct">
-            <End Role="TypeOfProduct" EntitySet="TypeOfProduct" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductCheck_Product" Association="Self.FK_ProductCheck_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="ProductCheck" EntitySet="ProductCheck" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_UserType" Association="Self.FK_User_UserType">
-            <End Role="UserType" EntitySet="UserType" />
-            <End Role="User" EntitySet="User" />
-          </AssociationSet>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -619,6 +347,50 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="Check" EntityType="COFEModel.Check" />
+          <EntitySet Name="Cofe" EntityType="COFEModel.Cofe" />
+          <EntitySet Name="Composition" EntityType="COFEModel.Composition" />
+          <EntitySet Name="Gender" EntityType="COFEModel.Gender" />
+          <EntitySet Name="Product" EntityType="COFEModel.Product" />
+          <EntitySet Name="ProductCheck" EntityType="COFEModel.ProductCheck" />
+          <EntitySet Name="sysdiagrams" EntityType="COFEModel.sysdiagrams" />
+          <EntitySet Name="TypeOfProduct" EntityType="COFEModel.TypeOfProduct" />
+          <EntitySet Name="User" EntityType="COFEModel.User" />
+          <EntitySet Name="UserType" EntityType="COFEModel.UserType" />
+          <EntitySet Name="CompositionProduct" EntityType="COFEModel.CompositionProduct" />
+          <EntitySet Name="BasketAll" EntityType="COFEModel.BasketAll" />
+          <AssociationSet Name="FK_Check_Cofe" Association="COFEModel.FK_Check_Cofe">
+            <End Role="Cofe" EntitySet="Cofe" />
+            <End Role="Check" EntitySet="Check" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Check_User1" Association="COFEModel.FK_Check_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Check" EntitySet="Check" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductCheck_Check" Association="COFEModel.FK_ProductCheck_Check">
+            <End Role="Check" EntitySet="Check" />
+            <End Role="ProductCheck" EntitySet="ProductCheck" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompositionProduct_Composition" Association="COFEModel.FK_CompositionProduct_Composition">
+            <End Role="Composition" EntitySet="Composition" />
+            <End Role="CompositionProduct" EntitySet="CompositionProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Gender" Association="COFEModel.FK_User_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_TypeOfProduct" Association="COFEModel.FK_Product_TypeOfProduct">
+            <End Role="TypeOfProduct" EntitySet="TypeOfProduct" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductCheck_Product" Association="COFEModel.FK_ProductCheck_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductCheck" EntitySet="ProductCheck" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserType" Association="COFEModel.FK_User_UserType">
+            <End Role="UserType" EntitySet="UserType" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -631,139 +403,240 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <EntityType Name="Check">
+          <Key>
+            <PropertyRef Name="IDCheck" />
+          </Key>
+          <Property Name="IDCheck" Type="Int32" Nullable="false" />
+          <Property Name="IDCofe" Type="Int32" />
+          <Property Name="IssuingTime" Type="DateTime" Precision="3" />
+          <Property Name="IDUser" Type="Int32" />
+          <Property Name="ISBuy" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Cofe" Relationship="COFEModel.FK_Check_Cofe" FromRole="Check" ToRole="Cofe" />
+          <NavigationProperty Name="User" Relationship="COFEModel.FK_Check_User1" FromRole="Check" ToRole="User" />
+          <NavigationProperty Name="ProductCheck" Relationship="COFEModel.FK_ProductCheck_Check" FromRole="Check" ToRole="ProductCheck" />
+        </EntityType>
+        <EntityType Name="Cofe">
+          <Key>
+            <PropertyRef Name="IDCofe" />
+          </Key>
+          <Property Name="IDCofe" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DirectorName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Check" Relationship="COFEModel.FK_Check_Cofe" FromRole="Cofe" ToRole="Check" />
+        </EntityType>
+        <EntityType Name="Composition">
+          <Key>
+            <PropertyRef Name="IDComposition" />
+          </Key>
+          <Property Name="IDComposition" Type="Int32" Nullable="false" />
+          <Property Name="NameOfIngredient" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="WeightInGrams" Type="Int32" Nullable="false" />
+          <Property Name="Calories" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CompositionProduct" Relationship="COFEModel.FK_CompositionProduct_Composition" FromRole="Composition" ToRole="CompositionProduct" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="IDGender" />
+          </Key>
+          <Property Name="IDGender" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="NameOfGender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="COFEModel.FK_User_Gender" FromRole="Gender" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="IDProduct" />
+          </Key>
+          <Property Name="IDProduct" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameOfProduct" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Cost" Type="Int32" />
+          <Property Name="Sale" Type="Double" />
+          <Property Name="IDTypeOfProduct" Type="Int32" Nullable="false" />
+          <Property Name="Imagin" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TypeOfProduct" Relationship="COFEModel.FK_Product_TypeOfProduct" FromRole="Product" ToRole="TypeOfProduct" />
+          <NavigationProperty Name="ProductCheck" Relationship="COFEModel.FK_ProductCheck_Product" FromRole="Product" ToRole="ProductCheck" />
+        </EntityType>
+        <EntityType Name="ProductCheck">
+          <Key>
+            <PropertyRef Name="idprodcheck" />
+          </Key>
+          <Property Name="IDProduct" Type="Int32" />
+          <Property Name="IDCheck" Type="Int32" Nullable="false" />
+          <Property Name="idprodcheck" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Check" Relationship="COFEModel.FK_ProductCheck_Check" FromRole="ProductCheck" ToRole="Check" />
+          <NavigationProperty Name="Product" Relationship="COFEModel.FK_ProductCheck_Product" FromRole="ProductCheck" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TypeOfProduct">
+          <Key>
+            <PropertyRef Name="IDTypeOfProduct" />
+          </Key>
+          <Property Name="IDTypeOfProduct" Type="Int32" Nullable="false" />
+          <Property Name="NameTypeOfProduct" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="COFEModel.FK_Product_TypeOfProduct" FromRole="TypeOfProduct" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="IDUser" />
+          </Key>
+          <Property Name="IDTypeOfUser" Type="Int32" />
+          <Property Name="IDUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IDGender" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Patronimic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Check" Relationship="COFEModel.FK_Check_User1" FromRole="User" ToRole="Check" />
+          <NavigationProperty Name="Gender" Relationship="COFEModel.FK_User_Gender" FromRole="User" ToRole="Gender" />
+          <NavigationProperty Name="UserType" Relationship="COFEModel.FK_User_UserType" FromRole="User" ToRole="UserType" />
+        </EntityType>
+        <EntityType Name="UserType">
+          <Key>
+            <PropertyRef Name="IDType" />
+          </Key>
+          <Property Name="IDType" Type="Int32" Nullable="false" />
+          <Property Name="NameTypeOfUser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="RightsOfUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="COFEModel.FK_User_UserType" FromRole="UserType" ToRole="User" />
+        </EntityType>
+        <EntityType Name="CompositionProduct">
+          <Key>
+            <PropertyRef Name="IDComposition" />
+            <PropertyRef Name="IDProduct" />
+          </Key>
+          <Property Name="IDComposition" Type="Int32" Nullable="false" />
+          <Property Name="IDProduct" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Composition" Relationship="COFEModel.FK_CompositionProduct_Composition" FromRole="CompositionProduct" ToRole="Composition" />
+        </EntityType>
+        <EntityType Name="BasketAll">
+          <Key>
+            <PropertyRef Name="IDCheck" />
+          </Key>
+          <Property Name="NameOfProduct" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Cost" Type="Int32" />
+          <Property Name="Sale" Type="Double" />
+          <Property Name="Imagin" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="IDCheck" Type="Int32" Nullable="false" />
+          <Property Name="IDUser" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_Check_Cofe">
+          <End Type="COFEModel.Cofe" Role="Cofe" Multiplicity="0..1" />
+          <End Type="COFEModel.Check" Role="Check" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cofe">
+              <PropertyRef Name="IDCofe" />
+            </Principal>
+            <Dependent Role="Check">
+              <PropertyRef Name="IDCofe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Check_User1">
+          <End Type="COFEModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="COFEModel.Check" Role="Check" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="IDUser" />
+            </Principal>
+            <Dependent Role="Check">
+              <PropertyRef Name="IDUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductCheck_Check">
+          <End Type="COFEModel.Check" Role="Check" Multiplicity="1" />
+          <End Type="COFEModel.ProductCheck" Role="ProductCheck" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Check">
+              <PropertyRef Name="IDCheck" />
+            </Principal>
+            <Dependent Role="ProductCheck">
+              <PropertyRef Name="IDCheck" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompositionProduct_Composition">
+          <End Type="COFEModel.Composition" Role="Composition" Multiplicity="1" />
+          <End Type="COFEModel.CompositionProduct" Role="CompositionProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Composition">
+              <PropertyRef Name="IDComposition" />
+            </Principal>
+            <Dependent Role="CompositionProduct">
+              <PropertyRef Name="IDComposition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Gender">
+          <End Type="COFEModel.Gender" Role="Gender" Multiplicity="0..1" />
+          <End Type="COFEModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="IDGender" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="IDGender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_TypeOfProduct">
+          <End Type="COFEModel.TypeOfProduct" Role="TypeOfProduct" Multiplicity="1" />
+          <End Type="COFEModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfProduct">
+              <PropertyRef Name="IDTypeOfProduct" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="IDTypeOfProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductCheck_Product">
+          <End Type="COFEModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="COFEModel.ProductCheck" Role="ProductCheck" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="IDProduct" />
+            </Principal>
+            <Dependent Role="ProductCheck">
+              <PropertyRef Name="IDProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_UserType">
+          <End Type="COFEModel.UserType" Role="UserType" Multiplicity="0..1" />
+          <End Type="COFEModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserType">
+              <PropertyRef Name="IDType" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="IDTypeOfUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Хранилище COFEModelContainer" CdmEntityContainer="COFEEntities">
-          <EntitySetMapping Name="Check">
-            <EntityTypeMapping TypeName="COFEModel.Check">
-              <MappingFragment StoreEntitySet="Check">
-                <ScalarProperty Name="ISBuy" ColumnName="ISBuy" />
-                <ScalarProperty Name="IDCheck" ColumnName="IDCheck" />
-                <ScalarProperty Name="IDCofe" ColumnName="IDCofe" />
-                <ScalarProperty Name="IssuingTime" ColumnName="IssuingTime" />
-                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Cofe">
-            <EntityTypeMapping TypeName="COFEModel.Cofe">
-              <MappingFragment StoreEntitySet="Cofe">
-                <ScalarProperty Name="IDCofe" ColumnName="IDCofe" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="DirectorName" ColumnName="DirectorName" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Composition">
-            <EntityTypeMapping TypeName="COFEModel.Composition">
-              <MappingFragment StoreEntitySet="Composition">
-                <ScalarProperty Name="IDComposition" ColumnName="IDComposition" />
-                <ScalarProperty Name="NameOfIngredient" ColumnName="NameOfIngredient" />
-                <ScalarProperty Name="WeightInGrams" ColumnName="WeightInGrams" />
-                <ScalarProperty Name="Calories" ColumnName="Calories" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Gender">
-            <EntityTypeMapping TypeName="COFEModel.Gender">
-              <MappingFragment StoreEntitySet="Gender">
-                <ScalarProperty Name="IDGender" ColumnName="IDGender" />
-                <ScalarProperty Name="NameOfGender" ColumnName="NameOfGender" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Product">
-            <EntityTypeMapping TypeName="COFEModel.Product">
-              <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
-                <ScalarProperty Name="NameOfProduct" ColumnName="NameOfProduct" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Cost" ColumnName="Cost" />
-                <ScalarProperty Name="Sale" ColumnName="Sale" />
-                <ScalarProperty Name="IDTypeOfProduct" ColumnName="IDTypeOfProduct" />
-                <ScalarProperty Name="Imagin" ColumnName="Imagin" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProductCheck">
-            <EntityTypeMapping TypeName="COFEModel.ProductCheck">
-              <MappingFragment StoreEntitySet="ProductCheck">
-                <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
-                <ScalarProperty Name="IDCheck" ColumnName="IDCheck" />
-                <ScalarProperty Name="idprodcheck" ColumnName="idprodcheck" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="COFEModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TypeOfProduct">
-            <EntityTypeMapping TypeName="COFEModel.TypeOfProduct">
-              <MappingFragment StoreEntitySet="TypeOfProduct">
-                <ScalarProperty Name="IDTypeOfProduct" ColumnName="IDTypeOfProduct" />
-                <ScalarProperty Name="NameTypeOfProduct" ColumnName="NameTypeOfProduct" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="User">
-            <EntityTypeMapping TypeName="COFEModel.User">
-              <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="IDTypeOfUser" ColumnName="IDTypeOfUser" />
-                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Login" ColumnName="Login" />
-                <ScalarProperty Name="IDGender" ColumnName="IDGender" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Patronimic" ColumnName="Patronimic" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserType">
-            <EntityTypeMapping TypeName="COFEModel.UserType">
-              <MappingFragment StoreEntitySet="UserType">
-                <ScalarProperty Name="IDType" ColumnName="IDType" />
-                <ScalarProperty Name="NameTypeOfUser" ColumnName="NameTypeOfUser" />
-                <ScalarProperty Name="RightsOfUser" ColumnName="RightsOfUser" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CompositionProduct">
-            <EntityTypeMapping TypeName="COFEModel.CompositionProduct">
-              <MappingFragment StoreEntitySet="CompositionProduct">
-                <ScalarProperty Name="IDComposition" ColumnName="IDComposition" />
-                <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BasketAll">
-            <EntityTypeMapping TypeName="COFEModel.BasketAll">
-              <MappingFragment StoreEntitySet="BasketAll">
-                <ScalarProperty Name="NameOfProduct" ColumnName="NameOfProduct" />
-                <ScalarProperty Name="Cost" ColumnName="Cost" />
-                <ScalarProperty Name="Sale" ColumnName="Sale" />
-                <ScalarProperty Name="Imagin" ColumnName="Imagin" />
-                <ScalarProperty Name="IDCheck" ColumnName="IDCheck" />
-                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище COFEModel.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище COFEModel.sp_creatediagram" />
           <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище COFEModel.sp_dropdiagram" />
@@ -788,6 +661,133 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище COFEModel.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище COFEModel.sp_upgraddiagrams" />
+          <EntitySetMapping Name="Check">
+            <EntityTypeMapping TypeName="COFEModel.Check">
+              <MappingFragment StoreEntitySet="Check">
+                <ScalarProperty Name="ISBuy" ColumnName="ISBuy" />
+                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+                <ScalarProperty Name="IssuingTime" ColumnName="IssuingTime" />
+                <ScalarProperty Name="IDCofe" ColumnName="IDCofe" />
+                <ScalarProperty Name="IDCheck" ColumnName="IDCheck" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cofe">
+            <EntityTypeMapping TypeName="COFEModel.Cofe">
+              <MappingFragment StoreEntitySet="Cofe">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="DirectorName" ColumnName="DirectorName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="IDCofe" ColumnName="IDCofe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Composition">
+            <EntityTypeMapping TypeName="COFEModel.Composition">
+              <MappingFragment StoreEntitySet="Composition">
+                <ScalarProperty Name="Calories" ColumnName="Calories" />
+                <ScalarProperty Name="WeightInGrams" ColumnName="WeightInGrams" />
+                <ScalarProperty Name="NameOfIngredient" ColumnName="NameOfIngredient" />
+                <ScalarProperty Name="IDComposition" ColumnName="IDComposition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gender">
+            <EntityTypeMapping TypeName="COFEModel.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="NameOfGender" ColumnName="NameOfGender" />
+                <ScalarProperty Name="IDGender" ColumnName="IDGender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product">
+            <EntityTypeMapping TypeName="COFEModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Imagin" ColumnName="Imagin" />
+                <ScalarProperty Name="IDTypeOfProduct" ColumnName="IDTypeOfProduct" />
+                <ScalarProperty Name="Sale" ColumnName="Sale" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="NameOfProduct" ColumnName="NameOfProduct" />
+                <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductCheck">
+            <EntityTypeMapping TypeName="COFEModel.ProductCheck">
+              <MappingFragment StoreEntitySet="ProductCheck">
+                <ScalarProperty Name="idprodcheck" ColumnName="idprodcheck" />
+                <ScalarProperty Name="IDCheck" ColumnName="IDCheck" />
+                <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="COFEModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeOfProduct">
+            <EntityTypeMapping TypeName="COFEModel.TypeOfProduct">
+              <MappingFragment StoreEntitySet="TypeOfProduct">
+                <ScalarProperty Name="NameTypeOfProduct" ColumnName="NameTypeOfProduct" />
+                <ScalarProperty Name="IDTypeOfProduct" ColumnName="IDTypeOfProduct" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="COFEModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Patronimic" ColumnName="Patronimic" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="IDGender" ColumnName="IDGender" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+                <ScalarProperty Name="IDTypeOfUser" ColumnName="IDTypeOfUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserType">
+            <EntityTypeMapping TypeName="COFEModel.UserType">
+              <MappingFragment StoreEntitySet="UserType">
+                <ScalarProperty Name="RightsOfUser" ColumnName="RightsOfUser" />
+                <ScalarProperty Name="NameTypeOfUser" ColumnName="NameTypeOfUser" />
+                <ScalarProperty Name="IDType" ColumnName="IDType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompositionProduct">
+            <EntityTypeMapping TypeName="COFEModel.CompositionProduct">
+              <MappingFragment StoreEntitySet="CompositionProduct">
+                <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
+                <ScalarProperty Name="IDComposition" ColumnName="IDComposition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BasketAll">
+            <EntityTypeMapping TypeName="COFEModel.BasketAll">
+              <MappingFragment StoreEntitySet="BasketAll">
+                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+                <ScalarProperty Name="IDCheck" ColumnName="IDCheck" />
+                <ScalarProperty Name="Imagin" ColumnName="Imagin" />
+                <ScalarProperty Name="Sale" ColumnName="Sale" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="NameOfProduct" ColumnName="NameOfProduct" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

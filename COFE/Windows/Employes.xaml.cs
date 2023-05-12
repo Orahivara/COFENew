@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
@@ -34,12 +35,27 @@ namespace COFE.Windows
 
         private void addemploye_Click(object sender, RoutedEventArgs e)
         {
-
+            AddEmployee addEmployee=new AddEmployee();
+            addEmployee.Show();
+            this.Close();
         }
 
         private void btn_Click(object sender, RoutedEventArgs e)
         {
+            if (listviewUsers.SelectedIndex == -1)
+            {
 
+                MessageBox.Show("Сотрудник не выбран");
+            }
+            else
+            {
+                UpdateEmployee updateEmployee = new UpdateEmployee();
+                Application.Current.Resources["Employee"]=listviewUsers.SelectedItems[0];
+                MessageBox.Show(listviewUsers.SelectedItems[0].ToString());
+                  
+              //  updateEmployee.Show();
+             //   this.Close();
+            }
         }
     }
 }

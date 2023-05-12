@@ -23,6 +23,12 @@ namespace COFE.Windows
         {
             InitializeComponent();
             hi.Text = "Аве ," + Application.Current.Properties["Name"].ToString();
+            if(Convert.ToInt32(Application.Current.Properties["Role"])!=2)
+            {
+                something.IsEnabled = true;
+                employ.IsEnabled = true;
+
+            }
         }
 
         private void products_Click(object sender, RoutedEventArgs e)

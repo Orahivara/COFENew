@@ -7,6 +7,16 @@
         mc:Ignorable="d"
         Title="AddProduct" Height="450" Width="800">
     <Grid>
-        
+        <Button x:Name="photo" Content="+" HorizontalAlignment="Left" Margin="64,53,0,0" VerticalAlignment="Top" Height="164" Width="192" FontSize="72" Click="photo_Click"/>
+        <TextBox x:Name="nameofprod" HorizontalAlignment="Left" Margin="64,247,0,0" TextWrapping="Wrap" Text="Название продукта:" VerticalAlignment="Top" Width="144" Height="45" RenderTransformOrigin="0.487,0.471"/>
+        <TextBox x:Name="quant" HorizontalAlignment="Left" Margin="64,318,0,0" TextWrapping="Wrap" Text="Количество:" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="cost" HorizontalAlignment="Left" Margin="64,368,0,0" TextWrapping="Wrap" Text="Цена:" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="typeprod" HorizontalAlignment="Left" Margin="472,77,0,0" VerticalAlignment="Top" Width="120"/>
+        <CheckBox x:Name="sale" Content="Скидка" HorizontalAlignment="Left" Margin="592,182,0,0" VerticalAlignment="Top" Checked="sale_Checked" />
+        <TextBlock x:Name="ooo" HorizontalAlignment="Left" Margin="532,270,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Height="39" Width="60" RenderTransformOrigin="0.902,0.153" Visibility="Hidden"/>
+        <Button x:Name="plus" Content="+" HorizontalAlignment="Left" Margin="608,268,0,0" VerticalAlignment="Top" Width="20" Height="20" RenderTransformOrigin="0.521,0.527" IsEnabled="False" Visibility="Hidden"/>
+        <Button x:Name="minus" Content="-" HorizontalAlignment="Left" Margin="472,268,0,0" VerticalAlignment="Top" Width="20" Height="20" RenderTransformOrigin="0.403,0.592" IsEnabled="False" Visibility="Hidden"/>
+        <Button x:Name="additem" Content="ADD" HorizontalAlignment="Left" Margin="472,336,0,0" VerticalAlignment="Top" Height="67" Width="146" Click="additem_Click"/>
+
     </Grid>
 </Window>

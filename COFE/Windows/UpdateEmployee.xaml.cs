@@ -1,5 +1,4 @@
 ﻿using COFE.ClassHelper;
-using COFE.DB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,26 +16,17 @@ using System.Windows.Shapes;
 namespace COFE.Windows
 {
     /// <summary>
-    /// Логика взаимодействия для Basket.xaml
+    /// Логика взаимодействия для UpdateEmployee.xaml
     /// </summary>
-    public partial class Basket : Window
+    public partial class UpdateEmployee : Window
     {
-        public Basket()
+        public UpdateEmployee()
         {
             InitializeComponent();
-            GetProduct();
-
-        }
-
-        private void GetProduct()
-        {
-            List<BasketAll> OrderList = new List<BasketAll>();
-
-            OrderList = HELP.Context.BasketAll.ToList();
-            int check = (int)Application.Current.Properties["CHECK"];
-
-            listv.ItemsSource = OrderList.Where(x=>x.IDCheck==check);
-           
+      //      int user = (int)Application.Current.Resources["Employee"];
+            //var t=HELP.Context.User.FirstOrDefault(p=>p.IDUser==user);
+            //FIO.Text = t.FirstName;
+            
         }
     }
 }

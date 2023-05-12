@@ -24,7 +24,7 @@ namespace COFE.DB
         public Nullable<int> IDCofe { get; set; }
         public Nullable<System.DateTime> IssuingTime { get; set; }
         public Nullable<int> IDUser { get; set; }
-        public string ISBuy { get; set; }
+        public bool ISBuy { get; set; }
     
         public virtual Cofe Cofe { get; set; }
         public virtual User User { get; set; }

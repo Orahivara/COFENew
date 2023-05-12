@@ -52,6 +52,7 @@ namespace COFE.Windows
                 {
                     string[] name = FIO.Text.Split(new char[] { ' ' });
                     adduser.FirstName = name[1];
+                   
                     adduser.LastName = name[0];
                     adduser.Patronimic = name[2];
                     adduser.Email = email.Text;
@@ -62,6 +63,8 @@ namespace COFE.Windows
                     adduser.IDTypeOfUser = (type.SelectedItem as DB.UserType).IDType;
 
                     Application.Current.Properties["Role"] = (type.SelectedItem as DB.UserType).IDType;
+                    Application.Current.Properties["Name"] = adduser.FirstName.ToString();
+
                     if (male.IsChecked == true)
                     {
 
@@ -72,8 +75,9 @@ namespace COFE.Windows
                     HELP.Context.User.Add(adduser);
 
                     HELP.Context.SaveChanges();
-                    PlaceOrder placeOrder = new PlaceOrder();
-                    placeOrder.Show();
+                   
+                    Choose choose = new Choose();
+                    choose.Show();
                     this.Close();
 
                 }

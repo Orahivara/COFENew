@@ -41,15 +41,18 @@ namespace COFE.Windows
         }
         Check check = new Check();
 
+        public void ugh() { 
+        
+        }
         private void btn_Click(object sender, RoutedEventArgs e)
         {
             int user = (int)Application.Current.Properties["All"];
             var v = HELP.Context.User.Where(p=>p.IDUser==user);
-            var y = HELP.Context.Check.Count();
+           var y = HELP.Context.Check.Count();
          
-            check.IDCheck = y+1;
-            check.IDUser = v.ToList()[0].IDUser;
-            
+           check.IDCheck = y+1;
+           check.IDUser = v.ToList()[0].IDUser;
+           check.ISBuy = false;
         
             HELP.Context.Check.Add(check);
             check.IDUser = v.ToList()[0].IDUser;
@@ -75,9 +78,20 @@ namespace COFE.Windows
 
             HELP.Context.SaveChanges();
             MessageBox.Show("Успешно");
+          
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Windows.AddProduct add = new AddProduct();
+            add.Show();
+        }
+
+        private void bug_Click(object sender, RoutedEventArgs e)
+        {
             Windows.Basket bascet = new Basket();
             bascet.Show();
-
         }
     }
 
